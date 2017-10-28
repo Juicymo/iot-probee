@@ -1,0 +1,25 @@
+# Run in zsh:
+# dot -Tpng fsm_reasoning.dot >! fsm_reasoning.png
+
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; Idle;
+	node [shape = circle];
+	Idle -> Scanning [ label = "" ];
+	Scanning -> Reasoning [ label = "" ];
+	Reasoning -> TurnLeft [ label = "" ];
+	Reasoning -> TurnRight [ label = "" ];
+	Reasoning -> Forward [ label = "" ];
+	Reasoning -> Backward [ label = "" ];
+	Backward -> TurnRight [ label = "" ];
+	Backward -> TurnLeft [ label = "" ];
+	Forward -> FastForward [ label = "" ];
+	Forward -> Reasoning [ label = "" ];
+	FastForward -> Reasoning [ label = "" ];
+	Backward -> Reasoning [ label = "" ];
+	TurnLeft -> Reasoning [ label = "" ];
+	TurnRight -> Reasoning [ label = "" ];
+	Reasoning -> Scanning [ label = "" ];
+	Reasoning -> Idle [ label = "" ];
+}
