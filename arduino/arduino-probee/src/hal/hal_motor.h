@@ -41,7 +41,7 @@ void _hal_motor_drive_bwd(byte motor, byte pwm) {
 // Public
 void hal_motor_drive(byte motor, float speed) { // speed: fwd -> {0,5 - 1.0}, bwd -> {-0,5 - -1.0}
 	TRACE("MOTOR ");
-	TRACE((motor == MOTOR_BOTH ? 'BOTH' : (motor == MOTOR_LEFT ? 'LEFT' : 'RIGHT')));
+	TRACE(motor);
 	TRACE(": ");
 	TRACE(speed);
 
