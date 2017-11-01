@@ -13,12 +13,12 @@ void hal_bluetooth_loop() {
 		  float speed_left = Serial.parseFloat();
 		  float speed_right = Serial.parseFloat();
 
-		  hal_motor_drive(M_L, speed_left);
-		  hal_motor_drive(M_R, speed_right);
+		  hal_motor_drive(MOTOR_LEFT, speed_left);
+		  hal_motor_drive(MOTOR_RIGHT, speed_right);
 		}
 		else {
-		  hal_motor_stop(M_L);
-		  hal_motor_stop(M_R);
+		  hal_motor_stop(MOTOR_LEFT);
+		  hal_motor_stop(MOTOR_RIGHT);
 		}
 
 		cmd = 0;

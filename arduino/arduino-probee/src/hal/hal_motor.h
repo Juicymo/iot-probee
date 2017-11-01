@@ -1,40 +1,40 @@
 // Private
-void hal_motor_off(byte motor) {
+void _hal_motor_off(byte motor) {
 	if (motor == MOTOR_LEFT) {
-		analogWrite(M_PWM_L, 0);
-		digitalWrite(M_L1, LOW);
-		digitalWrite(M_L2, LOW);
+		analogWrite(MOTOR_LEFT_PWM, 0);
+		digitalWrite(MOTOR_LEFT_DIRECTION, LOW);
+		digitalWrite(MOTOR_LEFT_ENABLE, LOW);
 	}
 	else {
-		analogWrite(M_PWM_R, 0);
-		digitalWrite(M_R1, LOW);
-		digitalWrite(M_R2, LOW);
+		analogWrite(MOTOR_RIGHT_PWM, 0);
+		digitalWrite(MOTOR_RIGHT_DIRECTION, LOW);
+		digitalWrite(MOTOR_RIGHT_ENABLE, LOW);
 	}
 }
 
-void hal_motor_drive_fwd(byte motor, byte pwm) {
+void _hal_motor_drive_fwd(byte motor, byte pwm) {
 	if (motor == MOTOR_LEFT) {
-		analogWrite(M_PWM_L, pwm);
-		digitalWrite(M_L1, LOW);
-		digitalWrite(M_L2, HIGH);
+		analogWrite(MOTOR_LEFT_PWM, pwm);
+		digitalWrite(MOTOR_LEFT_DIRECTION, LOW);
+		digitalWrite(MOTOR_LEFT_ENABLE, HIGH);
 	}
 	else {
-		analogWrite(M_PWM_R, pwm);
-		digitalWrite(M_R1, LOW);
-		digitalWrite(M_R2, HIGH);
+		analogWrite(MOTOR_RIGHT_PWM, pwm);
+		digitalWrite(MOTOR_RIGHT_DIRECTION, LOW);
+		digitalWrite(MOTOR_RIGHT_ENABLE, HIGH);
 	}
 }
 
-void hal_motor_drive_bwd(byte motor, byte pwm) {
+void _hal_motor_drive_bwd(byte motor, byte pwm) {
 	if (motor == MOTOR_LEFT) {
-		analogWrite(M_PWM_L, pwm);
-		digitalWrite(M_L1, HIGH);
-		digitalWrite(M_L2, LOW);
+		analogWrite(MOTOR_LEFT_PWM, pwm);
+		digitalWrite(MOTOR_LEFT_DIRECTION, HIGH);
+		digitalWrite(MOTOR_LEFT_ENABLE, LOW);
 	}
 	else {
-		analogWrite(M_PWM_R, pwm);
-		digitalWrite(M_R1, HIGH);
-		digitalWrite(M_R2, LOW);
+		analogWrite(MOTOR_RIGHT_PWM, pwm);
+		digitalWrite(MOTOR_RIGHT_DIRECTION, HIGH);
+		digitalWrite(MOTOR_RIGHT_ENABLE, LOW);
 	}
 }
 
@@ -49,28 +49,28 @@ void hal_motor_drive(byte motor, float speed) { // speed: fwd -> {0,5 - 1.0}, bw
 
 	if (pwm > 1) {
 		if (speed > 0) {
-			hal_motor_drive_fwd(motor, pwm);
+			_hal_motor_drive_fwd(motor, pwm);
 		}
 		else {
-			hal_motor_drive_bwd(motor, pwm);
+			_hal_motor_drive_bwd(motor, pwm);
 		}
 	}
 	else {
-		hal_motor_off(motor);
+		_hal_motor_off(motor);
 	}
 }
 
 void hal_motor_stop(byte motor) {
-	hal_motor_off(motor);
+	_hal_motor_off(motor);
 }
 
 void setup_hal_motor() {
-	pinMode(M_L1, OUTPUT);
-	pinMode(M_L2, OUTPUT);
-	pinMode(M_R1, OUTPUT);
-	pinMode(M_R2, OUTPUT);
-	pinMode(M_PWM_L, OUTPUT);
-	pinMode(M_PWM_R, OUTPUT);
+	pinMode(MOTOR_LEFT_DIRECTION, OUTPUT);
+	pinMode(MOTOR_LEFT_ENABLE, OUTPUT);
+	pinMode(MOTOR_RIGHT_DIRECTION, OUTPUT);
+	pinMode(MOTOR_RIGHT_ENABLE, OUTPUT);
+	pinMode(MOTOR_LEFT_PWM, OUTPUT);
+	pinMode(MOTOR_RIGHT_PWM, OUTPUT);
 
 	hal_motor_stop(MOTOR_LEFT);
 	hal_motor_stop(MOTOR_RIGHT);

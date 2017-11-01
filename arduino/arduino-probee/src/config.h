@@ -1,14 +1,11 @@
 // ----------------- PINS -----------------
 // Motors
-#define MOTOR_LEFT 1
-#define MOTOR_RIGHT 2
-
-#define M_PWM_L 6
-#define M_PWM_R 5
-#define M_L1 9
-#define M_L2 10
-#define M_R1 7
-#define M_R2 8
+#define MOTOR_LEFT_ENABLE 30
+#define MOTOR_LEFT_PWM 6
+#define MOTOR_LEFT_DIRECTION 10
+#define MOTOR_RIGHT_ENABLE 31
+#define MOTOR_RIGHT_PWM 5
+#define MOTOR_RIGHT_DIRECTION 8
 
 // Servos
 #define SERVO_PIN 11
@@ -27,6 +24,11 @@
 #define SONAR_FORWARD_TRIGGER A2
 
 // ----------------- CONSTANTS -----------------
+// Motors
+#define MOTOR_LEFT 1
+#define MOTOR_RIGHT 2
+
+// Servos
 // true = left, false = right
 #define SCAN_FULL_STARTING_DIRECTION true
 #define SCAN_FORWARD_STARTING_DIRECTION true
