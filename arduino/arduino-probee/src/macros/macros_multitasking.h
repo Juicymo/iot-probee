@@ -9,6 +9,8 @@
                                               name##_tick = millis();  \
                                            };
 
+#define PERFORM_TASK_ALWAYS(name)         name();
+
 // Private
 
 
