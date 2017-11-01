@@ -43,6 +43,12 @@
 #define SCAN_LEFT_STARTING_DIRECTION true
 #define SCAN_RIGHT_STARTING_DIRECTION true
 
+#define SCANNING_ALL          0
+#define SCANNING_FULL         1
+#define SCANNING_FORWARD      2
+#define SCANNING_LEFT         3
+#define SCANNING_RIGHT        4
+
 // Sensors - Ultrasonic
 #define SONAR_NUM            3 // Number of sensors.
 #define SONAR_MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
