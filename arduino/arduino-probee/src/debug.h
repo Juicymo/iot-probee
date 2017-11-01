@@ -11,6 +11,5 @@
 
 // Public
 void setup_debug() {
-	Serial.begin(9600);
 	TRACELN("Setup");
 }
