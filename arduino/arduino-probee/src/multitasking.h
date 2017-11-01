@@ -14,4 +14,5 @@ void loop_multitasking() {
     //PERFORM_TASK(hal_bluetooth, SPEED_BLUETOOTH);
     //PERFORM_TASK(state_machine, SPEED_STATE_MACHINE);
     //PERFORM_TASK(hal_i2c, SPEED_I2C);
+    PERFORM_TASK_ALWAYS(loop_hal_sensors_ultrasonic);
 }
