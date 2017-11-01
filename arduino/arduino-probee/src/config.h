@@ -1,7 +1,7 @@
 // ----------------- PINS -----------------
 // Motors
-#define M_L 1
-#define M_R 2
+#define MOTOR_LEFT 1
+#define MOTOR_RIGHT 2
 
 #define M_PWM_L 6
 #define M_PWM_R 5

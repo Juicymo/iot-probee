@@ -1,6 +1,6 @@
 // Private
 void hal_motor_off(byte motor) {
-	if (motor == M_L) {
+	if (motor == MOTOR_LEFT) {
 		analogWrite(M_PWM_L, 0);
 		digitalWrite(M_L1, LOW);
 		digitalWrite(M_L2, LOW);
@@ -13,7 +13,7 @@ void hal_motor_off(byte motor) {
 }
 
 void hal_motor_drive_fwd(byte motor, byte pwm) {
-	if (motor == M_L) {
+	if (motor == MOTOR_LEFT) {
 		analogWrite(M_PWM_L, pwm);
 		digitalWrite(M_L1, LOW);
 		digitalWrite(M_L2, HIGH);
@@ -26,7 +26,7 @@ void hal_motor_drive_fwd(byte motor, byte pwm) {
 }
 
 void hal_motor_drive_bwd(byte motor, byte pwm) {
-	if (motor == M_L) {
+	if (motor == MOTOR_LEFT) {
 		analogWrite(M_PWM_L, pwm);
 		digitalWrite(M_L1, HIGH);
 		digitalWrite(M_L2, LOW);
@@ -72,6 +72,6 @@ void setup_hal_motor() {
 	pinMode(M_PWM_L, OUTPUT);
 	pinMode(M_PWM_R, OUTPUT);
 
-	hal_motor_stop(M_L);
-	hal_motor_stop(M_R);
+	hal_motor_stop(MOTOR_LEFT);
+	hal_motor_stop(MOTOR_RIGHT);
 }
