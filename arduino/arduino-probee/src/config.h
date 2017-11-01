@@ -14,18 +14,14 @@
 #define SERVO_PIN             12
 
 // Sensors - Ultrasonic
-#define SONAR_NUM            3 // Number of sensors.
-#define SONAR_MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
-#define SONAR_PING_INTERVAL 33 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
+#define SONAR_TURRET_ECHO_PIN       49
+#define SONAR_TURRET_TRIGGER_PIN	  48
 
-#define SONAR_TURRET_ECHO       49
-#define SONAR_TURRET_TRIGGER	  48
+#define SONAR_FORWARD_ECHO_PIN      4
+#define SONAR_FORWARD_TRIGGER_PIN   33
 
-#define SONAR_FORWARD_ECHO      4
-#define SONAR_FORWARD_TRIGGER   33
-
-#define SONAR_BACKWARD_ECHO     5
-#define SONAR_BACKWARD_TRIGGER  32
+#define SONAR_BACKWARD_ECHO_PIN     5
+#define SONAR_BACKWARD_TRIGGER_PIN  32
 
 // ----------------- CONSTANTS -----------------
 // Motors
@@ -45,6 +41,11 @@
 #define SCAN_FORWARD_STARTING_DIRECTION true
 #define SCAN_LEFT_STARTING_DIRECTION true
 #define SCAN_RIGHT_STARTING_DIRECTION true
+
+// Sensors - Ultrasonic
+#define SONAR_NUM            3 // Number of sensors.
+#define SONAR_MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
+#define SONAR_PING_INTERVAL 33 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
 
 // Sensors - Infrared
 //#define INFRARED_FORWARD_LEFT 10
