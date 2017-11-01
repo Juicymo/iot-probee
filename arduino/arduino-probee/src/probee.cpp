@@ -22,6 +22,8 @@
 #include "hal/hal.h"
 //#include "ai/ai.h"
 
+#include "multitasking.h"
+
 void setup() {
 	setup_serial();
 	setup_debug();
