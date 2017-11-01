@@ -11,6 +11,7 @@
 // Custom Libraries
 #include <LiquidCrystal_I2C.h>
 #include <LiquidMenu.h>
+#include <NewPing.h>
 
 #define PROBEE_DEBUG
 #include "serial.h"
@@ -35,5 +36,4 @@ void setup() {
 
 void loop() {
 	loop_multitasking();
-	delay(10);
 }
