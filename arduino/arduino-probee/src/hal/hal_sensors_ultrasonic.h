@@ -28,17 +28,7 @@ void _oneSensorCycle() { // Sensor ping cycle complete, do something with the re
 
 // Public
 void setup_hal_sensors_ultrasonic() {
-	// // Turret
-	// pinMode(SONAR_TURRET_TRIGGER, OUTPUT);
-	// pinMode(SONAR_TURRET_ECHO, INPUT);
-	// // Forward
-	// pinMode(SONAR_FORWARD_TRIGGER, OUTPUT);
-	// pinMode(SONAR_FORWARD_ECHO, INPUT);
-	// // Backward
-	// pinMode(SONAR_BACKWARD_TRIGGER, OUTPUT);
-	// pinMode(SONAR_BACKWARD_ECHO, INPUT);
-
-  pingTimer[0] = millis() + 75;           // First ping starts at 75ms, gives time for the Arduino to chill before starting.
+	pingTimer[0] = millis() + 75;           // First ping starts at 75ms, gives time for the Arduino to chill before starting.
   for (uint8_t i = 1; i < SONAR_NUM; i++) // Set the starting time for each sensor.
     pingTimer[i] = pingTimer[i - 1] + SONAR_PING_INTERVAL;
 }
