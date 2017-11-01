@@ -1,14 +1,15 @@
 // ----------------- PINS -----------------
 // Motors
 #define MOTOR_LEFT_ENABLE 30
-#define MOTOR_LEFT_PWM 6
-#define MOTOR_LEFT_DIRECTION 10
+#define MOTOR_LEFT_PWM 7
+#define MOTOR_LEFT_DIRECTION 6
 #define MOTOR_RIGHT_ENABLE 31
-#define MOTOR_RIGHT_PWM 5
+#define MOTOR_RIGHT_PWM 9
+
 #define MOTOR_RIGHT_DIRECTION 8
 
 // Servos
-#define SERVO_PIN 11
+#define SERVO_PIN 12
 #define ROTATION_FORWARD 64
 #define ROTATION_LEFT 20
 #define ROTATION_RIGHT 120
@@ -27,6 +28,7 @@
 // Motors
 #define MOTOR_LEFT 1
 #define MOTOR_RIGHT 2
+#define MOTOR_BOTH 3
 
 // Servos
 // true = left, false = right
