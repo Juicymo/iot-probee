@@ -26,8 +26,10 @@ void _oneSensorCycle() { // Sensor ping cycle complete, do something with the re
     if (i == SONAR_SENSOR_TURRET) {
       if (cm[i] <= LASER_DISTANCE_ON) {
         hal_laser_on(LASER_TURRET);
+        hal_servo_stop_scanning(SCANNING_FULL);
       } else {
         hal_laser_off(LASER_TURRET);
+        hal_servo_start_scanning(SCANNING_FULL);
       }
     }
   }
