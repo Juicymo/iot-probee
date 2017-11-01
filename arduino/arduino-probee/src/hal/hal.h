@@ -15,7 +15,7 @@
 void setup_hal() {
 	setup_hal_motor();
 	//setup_hal_bluetooth();
-	//setup_hal_servo();
+	setup_hal_servo();
 	//setup_hal_sensors_ultrasonic();
 	//setup_hal_sensors_infrared();
   //setup_hal_i2c();
