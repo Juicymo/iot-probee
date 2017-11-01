@@ -1,11 +1,11 @@
 // ----------------- PINS -----------------
 // Motors
-#define MOTOR_LEFT_ENABLE     30
-#define MOTOR_LEFT_PWM        7
-#define MOTOR_LEFT_DIRECTION  6
-#define MOTOR_RIGHT_ENABLE    31
-#define MOTOR_RIGHT_PWM       8
-#define MOTOR_RIGHT_DIRECTION 9
+#define MOTOR_LEFT_ENABLE_PIN     30
+#define MOTOR_LEFT_PWM_PIN        7
+#define MOTOR_LEFT_DIRECTION_PIN  6
+#define MOTOR_RIGHT_ENABLE_PIN    31
+#define MOTOR_RIGHT_PWM_PIN       8
+#define MOTOR_RIGHT_DIRECTION_PIN 9
 
 // Lasers
 #define LASER_TURRET_PIN      34
