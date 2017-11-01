@@ -22,6 +22,14 @@ void _oneSensorCycle() { // Sensor ping cycle complete, do something with the re
     Serial.print("=");
     Serial.print(cm[i]);
     Serial.print("cm ");
+
+    if (i == SONAR_SENSOR_TURRET) {
+      if (cm[i] <= LASER_DISTANCE_ON) {
+        hal_laser_on(LASER_TURRET);
+      } else {
+        hal_laser_off(LASER_TURRET);
+      }
+    }
   }
   Serial.println();
 }
