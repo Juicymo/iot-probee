@@ -67,13 +67,13 @@ void _hal_servo_scan_right_reset() {
 }
 
 // Public - Scanning
-void hal_servo_stop_scanning(byte scanning) {
+void hal_servo_start_scanning(byte scanning) {
 	if (scanning == SCANNING_FULL) {
 		_hal_servo_is_scanning_full = true;
 	}
 }
 
-void hal_servo_start_scanning(byte scanning) {
+void hal_servo_stop_scanning(byte scanning) {
 	if (scanning == SCANNING_FULL || scanning == SCANNING_ALL) {
 		_hal_servo_is_scanning_full = false;
 	}
