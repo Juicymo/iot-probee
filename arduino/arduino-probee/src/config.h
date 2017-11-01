@@ -7,11 +7,11 @@
 #define MOTOR_RIGHT_PWM       8
 #define MOTOR_RIGHT_DIRECTION 9
 
+// Lasers
+#define LASER_TURRET_PIN      34
+
 // Servos
 #define SERVO_PIN             12
-#define ROTATION_FORWARD      64
-#define ROTATION_LEFT         20
-#define ROTATION_RIGHT        120
 
 // Sensors - Ultrasonic
 #define SONAR_NUM            3 // Number of sensors.
@@ -34,9 +34,12 @@
 #define MOTOR_BOTH 3
 
 // Lasers
-#define LASER_TURRET 34
+#define LASER_TURRET 1
 
 // Servos
+#define ROTATION_FORWARD      64
+#define ROTATION_LEFT         20
+#define ROTATION_RIGHT        120
 // true = left, false = right
 #define SCAN_FULL_STARTING_DIRECTION true
 #define SCAN_FORWARD_STARTING_DIRECTION true
