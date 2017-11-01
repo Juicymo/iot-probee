@@ -31,6 +31,7 @@
 
 // Lasers
 #define LASER_TURRET 1
+#define LASER_DISTANCE_ON 15
 
 // Servos
 #define ROTATION_FORWARD      64
@@ -46,6 +47,10 @@
 #define SONAR_NUM            3 // Number of sensors.
 #define SONAR_MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
 #define SONAR_PING_INTERVAL 33 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
+
+#define SONAR_SENSOR_TURRET     0
+#define SONAR_SENSOR_FORWARD    1
+#define SONAR_SENSOR_BACKWARD   2
 
 // Sensors - Infrared
 //#define INFRARED_FORWARD_LEFT 10
