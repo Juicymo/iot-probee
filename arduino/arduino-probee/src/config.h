@@ -18,14 +18,14 @@
 #define SONAR_MAX_DISTANCE 200 // Maximum distance (in cm) to ping.
 #define SONAR_PING_INTERVAL 33 // Milliseconds between sensor pings (29ms is about the min to avoid cross-sensor echo).
 
-#define SONAR_TURRET_ECHO     2
-#define SONAR_TURRET_TRIGGER	A0
+#define SONAR_TURRET_ECHO       2
+#define SONAR_TURRET_TRIGGER	  A0
 
-#define SONAR_BACKWARD_ECHO    3
-#define SONAR_BACKWARD_TRIGGER A1
+#define SONAR_BACKWARD_ECHO     3
+#define SONAR_BACKWARD_TRIGGER  A1
 
-#define SONAR_FORWARD_ECHO    4
-#define SONAR_FORWARD_TRIGGER A2
+#define SONAR_FORWARD_ECHO      4
+#define SONAR_FORWARD_TRIGGER   A2
 
 // ----------------- CONSTANTS -----------------
 // Motors
