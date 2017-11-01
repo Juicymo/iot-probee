@@ -1,4 +1,3 @@
-
 // FSM Definition (see fsm_reasoning.png)
 NEW_STATE(idle);
 NEW_STATE(scanning);
@@ -21,7 +20,7 @@ unsigned int steps[STEPS + 1] = {1000, 1000};
 // IDLE ----------------------------------------------------------------------------
 STATE_ENTER(idle) {
 	TRACE("idle enter");
-	
+
 	hal_motor_stop(M_L);
 	hal_motor_stop(M_R);
 }
@@ -31,7 +30,7 @@ STATE_UPDATE(idle) {
 		//fsm.transitionTo(scanning);
 		fsm.transitionTo(reasoning);
 	}
-	
+
 	hal_motor_drive(M_L, speed_left);
 	hal_motor_drive(M_R, speed_right);
 }
@@ -42,7 +41,7 @@ STATE_EXIT(idle) {
 // SCANNING ----------------------------------------------------------------------------
 STATE_ENTER(scanning) {
 	TRACE("scanning enter");
-	
+
 	hal_servo_scan_full_reset();
 }
 

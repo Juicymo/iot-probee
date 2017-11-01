@@ -1,4 +1,3 @@
-
 // Private
 float hal_sensors_ultrasonic_perform_measure(byte pin_trigger, byte pin_echo) {
   digitalWrite(pin_trigger, LOW);

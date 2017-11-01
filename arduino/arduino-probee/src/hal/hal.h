@@ -1,4 +1,4 @@
-
+// Includes
 // HAL = Hardware Abstraction Layer
 //#include "hal_lcd.h"
 #include "hal_i2c.h"
@@ -18,5 +18,5 @@ void setup_hal() {
 	setup_hal_servo();
 	setup_hal_sensors_ultrasonic();
 	//setup_hal_sensors_infrared();
-  setup_hal_i2c();
+  //setup_hal_i2c();
 }

@@ -1,4 +1,3 @@
-
 // Private
 Servo servo;
 int hal_servo_full_position = 0;
@@ -35,9 +34,9 @@ void setup_hal_servo() {
 // Public - Scanning
 void hal_servo_scan_full() {
 	int val = (SONAR_MIN + hal_servo_full_position * SONAR_STEP);
-	
+
 	hal_servo_rotate(val);
-	
+
 	hal_servo_full_position += hal_servo_full_direction ? 1 : (-1);
 
 	if (hal_servo_full_position >= SONAR_STEPS) {
@@ -55,7 +54,7 @@ void hal_servo_scan_full_reset() {
 }
 
 void hal_servo_scan_forward() {
-	
+
 }
 
 void hal_servo_scan_forward_reset() {
@@ -65,7 +64,7 @@ void hal_servo_scan_forward_reset() {
 }
 
 void hal_servo_scan_left() {
-	
+
 }
 
 void hal_servo_scan_left_reset() {
@@ -75,7 +74,7 @@ void hal_servo_scan_left_reset() {
 }
 
 void hal_servo_scan_right() {
-	
+
 }
 
 void hal_servo_scan_right_reset() {

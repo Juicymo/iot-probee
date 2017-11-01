@@ -1,4 +1,3 @@
-
 // Private
 int number = 0;
 void hal_i2c_send() {

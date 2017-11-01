@@ -1,4 +1,3 @@
-
 // Private
 void hal_motor_off(byte motor) {
 	if (motor == M_L) {
@@ -72,7 +71,7 @@ void setup_hal_motor() {
 	pinMode(M_R2, OUTPUT);
 	pinMode(M_PWM_L, OUTPUT);
 	pinMode(M_PWM_R, OUTPUT);
-	
+
 	hal_motor_stop(M_L);
 	hal_motor_stop(M_R);
 }

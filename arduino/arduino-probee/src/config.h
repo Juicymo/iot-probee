@@ -1,4 +1,4 @@
-
+// ----------------- PINS -----------------
 // Motors
 #define M_L 1
 #define M_R 2
@@ -16,12 +16,6 @@
 #define ROTATION_LEFT 20
 #define ROTATION_RIGHT 120
 
-// true = left, false = right
-#define SCAN_FULL_STARTING_DIRECTION true
-#define SCAN_FORWARD_STARTING_DIRECTION true
-#define SCAN_LEFT_STARTING_DIRECTION true
-#define SCAN_RIGHT_STARTING_DIRECTION true
-
 // Sensors - Ultrasonic
 #define SONAR_TURRET_ECHO 2
 #define SONAR_TURRET_TRIGGER	A0
@@ -31,6 +25,13 @@
 
 #define SONAR_FORWARD_ECHO 4
 #define SONAR_FORWARD_TRIGGER A2
+
+// ----------------- CONSTANTS -----------------
+// true = left, false = right
+#define SCAN_FULL_STARTING_DIRECTION true
+#define SCAN_FORWARD_STARTING_DIRECTION true
+#define SCAN_LEFT_STARTING_DIRECTION true
+#define SCAN_RIGHT_STARTING_DIRECTION true
 
 // Sensors - Infrared
 //#define INFRARED_FORWARD_LEFT 10

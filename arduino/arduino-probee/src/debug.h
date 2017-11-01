@@ -1,6 +1,5 @@
-
 // Macros
-#ifdef DEBUG
+#ifdef PROBEE_DEBUG
 #define TRACE(x) Serial.print(x);
 #define TRACELN(x) Serial.println(x);
 #else

@@ -1,4 +1,3 @@
-
 // Private
 
 // Public
@@ -9,11 +8,11 @@ void setup_hal_bluetooth() {
 void hal_bluetooth_loop() {
 	if (Serial.available() > 0) {
 		byte cmd = Serial.read();
-		
+
 		if (cmd == 'M') {
 		  float speed_left = Serial.parseFloat();
 		  float speed_right = Serial.parseFloat();
-		  
+
 		  hal_motor_drive(M_L, speed_left);
 		  hal_motor_drive(M_R, speed_right);
 		}
@@ -21,7 +20,7 @@ void hal_bluetooth_loop() {
 		  hal_motor_stop(M_L);
 		  hal_motor_stop(M_R);
 		}
-		
+
 		cmd = 0;
 	}
 }

@@ -1,4 +1,3 @@
-
 // Macros
 #define NEW_STATE(name)     void name##_enter();  \
                             void name##_update(); \

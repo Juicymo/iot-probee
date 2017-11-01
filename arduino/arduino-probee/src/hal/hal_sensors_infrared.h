@@ -1,4 +1,3 @@
-
 // Private
 bool hal_sensors_infrared_scan(pin) {
 	return digitalRead(pin);
