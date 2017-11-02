@@ -17,7 +17,7 @@ STATE_EXIT(idle) {
 
 // REASONING ----------------------------------------------------------------------------
 STATE_ENTER(reasoning) {
-
+	
 }
 
 STATE_UPDATE(reasoning) {
@@ -30,7 +30,7 @@ STATE_EXIT(reasoning) {
 
 // STOP ----------------------------------------------------------------------------
 STATE_ENTER(stop) {
-
+	hal_motor_stop(MOTOR_BOTH);
 }
 
 STATE_UPDATE(stop) {
@@ -123,6 +123,7 @@ STATE_EXIT(scanning) {
 STATE_ENTER(turn_left) {
 	hal_servo_stop_scanning(SCANNING_ALL);
 	hal_servo_rotate_left();
+	hal_motor_turn_left(MOTOR_SPEED_HALF);
 }
 
 STATE_UPDATE(turn_left) {
@@ -137,6 +138,7 @@ STATE_EXIT(turn_left) {
 STATE_ENTER(turn_right) {
 	hal_servo_stop_scanning(SCANNING_ALL);
 	hal_servo_rotate_right();
+	hal_motor_turn_right(MOTOR_SPEED_HALF);
 }
 
 STATE_UPDATE(turn_right) {
