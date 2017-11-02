@@ -152,16 +152,16 @@ void _hal_sensors_ultrasonic_handle_fsm_events_update(uint8_t i) {
 void _sensors_ultrasonic_one_sensor_cycle() { // Sensor ping cycle complete, do something with the results.
   // The following code would be replaced with your code that does something with the ping results.
   for (uint8_t i = 0; i < SONAR_NUM; i++) {
-    Serial.print(i);
-    Serial.print("=");
-    Serial.print(hal_sensors_ultrasonic_distances_cm[i]);
-    Serial.print("cm ");
+    // Serial.print(i);
+    // Serial.print("=");
+    // Serial.print(hal_sensors_ultrasonic_distances_cm[i]);
+    // Serial.print("cm ");
 
     _hal_sensors_ultrasonic_handle_distances_update(i);
     _hal_sensors_ultrasonic_handle_fsm_events_update(i);
     _hal_sensors_ultrasonic_handle_laser(i);
   }
-  Serial.println();
+  //Serial.println();
 }
 
 // Public
