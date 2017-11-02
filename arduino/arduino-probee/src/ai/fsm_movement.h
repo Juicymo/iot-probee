@@ -16,8 +16,46 @@ STATE_EXIT(idle) {
 }
 
 // REASONING ----------------------------------------------------------------------------
+long random_number;
 STATE_ENTER(reasoning) {
-	
+	byte forward_collision = hal_sensors_ultrasonic_collisions[SONAR_SENSOR_FORWARD];
+
+	if (forward_collision >= COLLISION_BLOCKED) {
+		random_number = random(3); // 0 - 2
+
+		if (random_number == 0) {
+			fsm_movement.trigger(EVENT_REASONING_TURN_LEFT);
+		}
+		else if (random_number == 1) {
+			fsm_movement.trigger(EVENT_REASONING_TURN_RIGHT);
+		}
+		else { // 2 = try to go backwards
+			byte backward_collision = hal_sensors_ultrasonic_collisions[SONAR_SENSOR_BACKWARD];
+
+			if (backward_collision == COLLISION_CLOSE) {
+				fsm_movement.trigger(EVENT_REASONING_MOVE_SLOW_BACKWARD);
+			}
+			else if (backward_collision <= COLLISION_NEAR) {
+				fsm_movement.trigger(EVENT_REASONING_MOVE_BACKWARD);
+			}
+			else { // cannot go back, turn instead
+				random_number = random(2); // 0 - 1
+
+				if (random_number == 0) {
+					fsm_movement.trigger(EVENT_REASONING_TURN_LEFT);
+				}
+				else { // random_number == 1
+					fsm_movement.trigger(EVENT_REASONING_TURN_RIGHT);
+				}
+			}
+		}
+	}
+	else if (forward_collision >= COLLISION_NEAR && forward_collision <= COLLISION_CLOSE) {
+		fsm_movement.trigger(EVENT_REASONING_MOVE_SLOW_FORWARD);
+	}
+	else { // forward_collision <= COLLISION_NEAR
+		fsm_movement.trigger(EVENT_REASONING_MOVE_FORWARD);
+	}
 }
 
 STATE_UPDATE(reasoning) {
