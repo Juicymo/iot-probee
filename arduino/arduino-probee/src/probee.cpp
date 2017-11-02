@@ -17,9 +17,10 @@
 #include "serial.h"
 #include "debug.h"
 
+#include "macros/macros.h"
+
 #include "config.h"
 
-#include "macros/macros.h"
 #include "hal/hal.h"
 #include "ai/ai.h"
 
