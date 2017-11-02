@@ -15,5 +15,5 @@
 
 // Public
 void setup_debug() {
-	TRACELN("Setup");
+	//TRACELN("Setup");
 }
