@@ -65,12 +65,12 @@ void hal_motor_drive(byte motor, float speed) { // speed: fwd -> {0,5 - 1.0}, bw
 
 void hal_motor_turn_left(float speed) {
 	hal_motor_drive(MOTOR_LEFT, speed);
-	hal_motor_drive(MOTOR_RIGHT, -speed)
+	hal_motor_drive(MOTOR_RIGHT, -speed);
 }
 
 void hal_motor_turn_right(float speed) {
 	hal_motor_drive(MOTOR_LEFT, -speed);
-	hal_motor_drive(MOTOR_RIGHT, speed)
+	hal_motor_drive(MOTOR_RIGHT, speed);
 }
 
 void hal_motor_stop(byte motor) {
