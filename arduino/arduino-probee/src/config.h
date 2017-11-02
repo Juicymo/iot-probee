@@ -80,7 +80,7 @@
 
 #define TICK_SCANNING 50
 #define TICK_BLUETOOTH 100
-#define TICK_STATE_MACHINE 100
+#define TICK_AI 100
 #define TICK_I2C 100
 
 // Movement
