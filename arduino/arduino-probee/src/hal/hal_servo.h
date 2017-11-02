@@ -82,6 +82,15 @@ void hal_servo_stop_scanning(byte scanning) {
 	}
 }
 
+boolean hal_servo_is_scanning(byte scanning) {
+	if (scanning == SCANNING_ALL) {
+		WARNING("Only one scanning can be tested for scanning at a time!")
+	}
+	if (scanning == SCANNING_FULL) {
+		return _hal_servo_is_scanning_full;
+	}
+}
+
 // Public - Rotation
 void hal_servo_rotate_forward() {
 	_hal_servo_rotate(ROTATION_FORWARD);
