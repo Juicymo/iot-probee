@@ -10,6 +10,7 @@
 #include "hal_led.h"
 #include "hal_sensors_ultrasonic.h"
 //#include "hal_sensors_infrared.h"
+#include "hal_lcd.h"
 
 // Private
 
@@ -20,6 +21,7 @@ void setup_hal() {
 	setup_hal_servo();
 	setup_hal_laser();
 	setup_hal_led();
+	setup_hal_lcd();
 	setup_hal_sensors_ultrasonic();
 	//setup_hal_sensors_infrared();
   //setup_hal_i2c();
