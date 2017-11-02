@@ -35,6 +35,8 @@ void setup() {
 	setup_ai();
 	//setup_mas();
 	setup_multitasking();
+
+	hal_lcd_welcome();
 }
 
 void loop() {
