@@ -26,6 +26,9 @@
 #define SONAR_BACKWARD_ECHO_PIN     5
 #define SONAR_BACKWARD_TRIGGER_PIN  32
 
+// LCD
+#define LCD_I2C_ADDRESS             0x27
+
 // ----------------- CONSTANTS -----------------
 // Motors
 #define MOTOR_LEFT 1
@@ -87,6 +90,7 @@
 #define TICK_SCANNING 50
 #define TICK_BLUETOOTH 100
 #define TICK_AI 100
+#define TICK_LCD 500
 #define TICK_I2C 100
 
 // Movement
