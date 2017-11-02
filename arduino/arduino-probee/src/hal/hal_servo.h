@@ -68,6 +68,9 @@ void _hal_servo_scan_right_reset() {
 
 // Public - Scanning
 void hal_servo_start_scanning(byte scanning) {
+	if (scanning == SCANNING_ALL) {
+		WARNING("Only one scanning can be started at a time!")
+	}
 	if (scanning == SCANNING_FULL) {
 		_hal_servo_is_scanning_full = true;
 	}
