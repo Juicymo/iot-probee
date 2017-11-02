@@ -234,9 +234,6 @@ void setup_fsm_movement() {
 	TRANSITION(movement, backward, brake, EVENT_BACKWARD_OBSTACLE_BLOCKED);
 	TRANSITION(movement, slow_backward, stop, EVENT_BACKWARD_OBSTACLE_BLOCKED);
 
-	// Stop after braking
-	TIMED_TRANSITION(movement, brake, stop, 50);
-
 	// Idle after stop
 	TRANSITION(movement, stop, idle, EVENT_REASONING_STOPPED);
 
@@ -252,6 +249,9 @@ void setup_fsm_movement() {
 	TRANSITION(movement, turn_right, reasoning, EVENT_TURRET_OBSTACLE_PRESENT);
 	TRANSITION(movement, turn_left, reasoning, EVENT_TURRET_OBSTACLE_PRESENT);
 
+	// Stop after braking
+	TIMED_TRANSITION(movement, brake, stop, 50);
+
 	// Stop turning after given interval
 	TIMED_TRANSITION(movement, turn_right, reasoning, 2000);
 	TIMED_TRANSITION(movement, turn_left, reasoning, 2000);
@@ -262,8 +262,6 @@ void setup_fsm_movement() {
 	// Start idle when moving forward for too long
 	TIMED_TRANSITION(movement, forward, idle, 10000);
 	TIMED_TRANSITION(movement, fast_forward, idle, 10000);
-
-	TRACELN("FSM Setup completed");
 }
 
 void fsm_movement_loop() {
