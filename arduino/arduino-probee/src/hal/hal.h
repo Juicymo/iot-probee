@@ -7,6 +7,7 @@
 //#include "hal_pir.h"
 #include "hal_servo.h"
 #include "hal_laser.h"
+#include "hal_led.h"
 #include "hal_sensors_ultrasonic.h"
 //#include "hal_sensors_infrared.h"
 
@@ -18,6 +19,7 @@ void setup_hal() {
 	//setup_hal_bluetooth();
 	setup_hal_servo();
 	setup_hal_laser();
+	setup_hal_led();
 	setup_hal_sensors_ultrasonic();
 	//setup_hal_sensors_infrared();
   //setup_hal_i2c();
