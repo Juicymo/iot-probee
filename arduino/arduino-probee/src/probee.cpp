@@ -21,7 +21,7 @@
 
 #include "macros/macros.h"
 #include "hal/hal.h"
-//#include "ai/ai.h"
+#include "ai/ai.h"
 
 #include "multitasking.h"
 
@@ -29,7 +29,7 @@ void setup() {
 	setup_serial();
 	setup_debug();
 	setup_hal();
-	//setup_state_machine();
+	setup_ai();
 	//setup_mas();
 	setup_multitasking();
 }
