@@ -26,13 +26,13 @@ STATE_ENTER(reasoning) {
 STATE_UPDATE(reasoning) {
 	byte forward_collision = hal_sensors_ultrasonic_collisions[SONAR_SENSOR_FORWARD];
 
-	for (uint8_t i = 0; i < SONAR_NUM; i++) {
-    Serial.print(i);
-    Serial.print("=");
-    Serial.print(hal_sensors_ultrasonic_distances_cm[i]);
-    Serial.print("cm ");
-  }
-  Serial.println();
+	// for (uint8_t i = 0; i < SONAR_NUM; i++) {
+  //   Serial.print(i);
+  //   Serial.print("=");
+  //   Serial.print(hal_sensors_ultrasonic_distances_cm[i]);
+  //   Serial.print("cm ");
+  // }
+  // Serial.println();
 
 	if (forward_collision >= COLLISION_BLOCKED) {
 		random_number = random(3); // 0 - 2
