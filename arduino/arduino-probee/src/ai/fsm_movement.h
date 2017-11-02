@@ -1,30 +1,4 @@
-// FSM Definition (see fsm_movement.png)
-// States
-DEFINE_STATE(idle);
-DEFINE_STATE(reasoning);
-DEFINE_STATE(stop);
-DEFINE_STATE(forward);
-DEFINE_STATE(slow_forward);
-DEFINE_STATE(fast_forward);
-DEFINE_STATE(backward);
-DEFINE_STATE(slow_backward);
-DEFINE_STATE(turn_left);
-DEFINE_STATE(turn_right);
-
-// Events
-#define EVENT_FORWARD_OBSTACLE_NONE   	10
-#define EVENT_FORWARD_OBSTACLE_FAR    	11
-#define EVENT_FORWARD_OBSTACLE_NEAR   	12
-#define EVENT_FORWARD_OBSTACLE_CLOSE    13
-#define EVENT_FORWARD_OBSTACLE_BLOCKED  14
-
-#define EVENT_BACKWARD_OBSTACLE_NONE   	20
-#define EVENT_BACKWARD_OBSTACLE_FAR    	21
-#define EVENT_BACKWARD_OBSTACLE_NEAR   	22
-#define EVENT_BACKWARD_OBSTACLE_CLOSE   23
-#define EVENT_BACKWARD_OBSTACLE_BLOCKED 24
-
-INIT_FSM(movement, idle);
+// FSM Definition (see fsm_movement.png and config.h)
 
 // Private
 
@@ -147,7 +121,8 @@ STATE_EXIT(scanning) {
 
 // TURN LEFT ----------------------------------------------------------------------------
 STATE_ENTER(turn_left) {
-
+	hal_servo_stop_scanning(SCANNING_ALL);
+	hal_servo_rotate_left();
 }
 
 STATE_UPDATE(turn_left) {
@@ -155,12 +130,13 @@ STATE_UPDATE(turn_left) {
 }
 
 STATE_EXIT(turn_left) {
-
+	hal_servo_start_scanning(SCANNING_FULL);
 }
 
 // TURN RIGHT ----------------------------------------------------------------------------
 STATE_ENTER(turn_right) {
-
+	hal_servo_stop_scanning(SCANNING_ALL);
+	hal_servo_rotate_right();
 }
 
 STATE_UPDATE(turn_right) {
@@ -168,12 +144,12 @@ STATE_UPDATE(turn_right) {
 }
 
 STATE_EXIT(turn_right) {
-
+	hal_servo_start_scanning(SCANNING_FULL);
 }
 
 // Public
 void setup_fsm_movement() {
-	
+
 }
 
 void fsm_movement_loop() {
