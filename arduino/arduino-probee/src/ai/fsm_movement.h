@@ -245,6 +245,12 @@ void setup_fsm_movement() {
 	TRANSITION(movement, reasoning, turn_left, EVENT_REASONING_TURN_LEFT);
 	TRANSITION(movement, reasoning, turn_right, EVENT_REASONING_TURN_RIGHT);
 
+	// React to obstacles while idle
+	TRANSITION(movement, idle, reasoning, EVENT_FORWARD_OBSTACLE_CLOSE);
+	TRANSITION(movement, idle, reasoning, EVENT_FORWARD_OBSTACLE_BLOCKED);
+	TRANSITION(movement, idle, reasoning, EVENT_BACKWARD_OBSTACLE_CLOSE);
+	TRANSITION(movement, idle, reasoning, EVENT_BACKWARD_OBSTACLE_BLOCKED);
+
 	// Stop turning on collision
 	TRANSITION(movement, turn_right, reasoning, EVENT_TURRET_OBSTACLE_PRESENT);
 	TRANSITION(movement, turn_left, reasoning, EVENT_TURRET_OBSTACLE_PRESENT);
@@ -257,11 +263,11 @@ void setup_fsm_movement() {
 	TIMED_TRANSITION(movement, turn_left, reasoning, 2000);
 
 	// Start reasoning when idle for too long
-	TIMED_TRANSITION(movement, idle, reasoning, 1000);
+	TIMED_TRANSITION(movement, idle, reasoning, 5000);
 
 	// Start idle when moving forward for too long
-	TIMED_TRANSITION(movement, forward, idle, 10000);
-	TIMED_TRANSITION(movement, fast_forward, idle, 10000);
+	TIMED_TRANSITION(movement, forward, idle, 5000);
+	TIMED_TRANSITION(movement, fast_forward, idle, 5000);
 }
 
 void fsm_movement_loop() {
