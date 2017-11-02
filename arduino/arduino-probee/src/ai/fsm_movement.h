@@ -176,7 +176,11 @@ STATE_EXIT(turn_right) {
 
 // Public
 void setup_fsm_movement() {
+	// Reasoning transitions
+	TRANSITION(movement, reasoning, forward, EVENT_REASONING_MOVE_FORWARD);
 
+	// Start reasoning when idle for too long
+	TIMED_TRANSITION(movement, idle, reasoning, 5000);
 }
 
 void fsm_movement_loop() {
