@@ -21,7 +21,7 @@ void _sensors_ultrasonic_echo_check() { // If ping received, set the sensor dist
 
 void _hal_sensors_ultrasonic_handle_laser(uint8_t i) {
   if (i == SONAR_SENSOR_TURRET) {
-    if (hal_servo_is_scanning(SCANNING_FULL)) {
+    if (hal_servo_is_scanning(SCANNING_FULL) || hal_laser_is_on(LASER_TURRET)) {
       if (hal_sensors_ultrasonic_distances_cm[i] <= LASER_DISTANCE_ON) {
         hal_laser_on(LASER_TURRET);
         hal_servo_stop_scanning(SCANNING_FULL);
