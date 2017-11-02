@@ -8,10 +8,13 @@
 #define MOTOR_RIGHT_DIRECTION_PIN 9
 
 // Lasers
-#define LASER_TURRET_PIN      34
+#define LASER_TURRET_PIN          34
+
+// LEDs
+#define LED_REASONING_PIN         13
 
 // Servos
-#define SERVO_PIN             12
+#define SERVO_PIN                 12
 
 // Sensors - Ultrasonic
 #define SONAR_TURRET_ECHO_PIN       49
@@ -32,6 +35,9 @@
 // Lasers
 #define LASER_TURRET 1
 #define LASER_DISTANCE_ON 15
+
+// LEDs
+#define LED_REASONING 1
 
 // Servos
 #define ROTATION_FORWARD      64
@@ -88,6 +94,9 @@
 #define MOTOR_SPEED_HALF 0.8
 #define MOTOR_SPEED_QUATER 0.6
 
+#define MOTOR_DIRECTION_FORWARD true
+#define MOTOR_DIRECTION_BACKWARD false
+
 // FSM Movement
 // - Events
 #define EVENT_FORWARD_OBSTACLE_NONE   	10
@@ -111,9 +120,11 @@
 #define EVENT_REASONING_TURN_LEFT           43
 #define EVENT_REASONING_MOVE_BACKWARD       44
 #define EVENT_REASONING_MOVE_SLOW_BACKWARD  45
+#define EVENT_REASONING_STOPPED             46
 // - States
 DEFINE_STATE(idle);
 DEFINE_STATE(reasoning);
+DEFINE_STATE(brake);
 DEFINE_STATE(stop);
 DEFINE_STATE(forward);
 DEFINE_STATE(slow_forward);
