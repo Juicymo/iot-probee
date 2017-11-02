@@ -43,7 +43,7 @@ STATE_EXIT(stop) {
 
 // FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(forward) {
-
+	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_HALF);
 }
 
 STATE_UPDATE(forward) {
@@ -56,7 +56,7 @@ STATE_EXIT(forward) {
 
 // SLOW FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(slow_forward) {
-
+	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_QUATER);
 }
 
 STATE_UPDATE(slow_forward) {
@@ -69,7 +69,7 @@ STATE_EXIT(slow_forward) {
 
 // FAST FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(fast_forward) {
-
+	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_FULL);
 }
 
 STATE_UPDATE(fast_forward) {
@@ -82,7 +82,7 @@ STATE_EXIT(fast_forward) {
 
 // BACKWARD ----------------------------------------------------------------------------
 STATE_ENTER(backward) {
-
+	hal_motor_drive(MOTOR_BOTH, -MOTOR_SPEED_HALF);
 }
 
 STATE_UPDATE(backward) {
@@ -95,7 +95,7 @@ STATE_EXIT(backward) {
 
 // SLOW BACKWARD ----------------------------------------------------------------------------
 STATE_ENTER(slow_backward) {
-
+	hal_motor_drive(MOTOR_BOTH, -MOTOR_SPEED_QUATER);
 }
 
 STATE_UPDATE(slow_backward) {
@@ -103,19 +103,6 @@ STATE_UPDATE(slow_backward) {
 }
 
 STATE_EXIT(slow_backward) {
-
-}
-
-// SCANNING ----------------------------------------------------------------------------
-STATE_ENTER(scanning) {
-
-}
-
-STATE_UPDATE(scanning) {
-
-}
-
-STATE_EXIT(scanning) {
 
 }
 
