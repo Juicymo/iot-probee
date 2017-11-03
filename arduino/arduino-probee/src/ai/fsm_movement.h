@@ -284,9 +284,9 @@ void setup_fsm_movement() {
 	TIMED_TRANSITION(movement, idle, reasoning, 5000);
 
 	// Start idle when moving forward for too long
-	TIMED_TRANSITION(movement, backward, idle, 3000);
-	TIMED_TRANSITION(movement, forward, idle, 10000);
-	TIMED_TRANSITION(movement, fast_forward, idle, 10000);
+	TIMED_TRANSITION(movement, backward, stop, 3000);
+	TIMED_TRANSITION(movement, forward, stop, 10000);
+	TIMED_TRANSITION(movement, fast_forward, stop, 10000);
 }
 
 void fsm_movement_loop() {
