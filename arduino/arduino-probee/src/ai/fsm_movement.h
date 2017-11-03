@@ -5,6 +5,7 @@
 // IDLE ----------------------------------------------------------------------------
 STATE_ENTER(idle) {
 	TRACELN("State: Idle");
+	hal_lcd_print_state("Idle    ");
 	hal_servo_start_scanning(SCANNING_FULL);
 }
 
@@ -20,6 +21,7 @@ STATE_EXIT(idle) {
 long random_number;
 STATE_ENTER(reasoning) {
 	TRACELN("State: Reasoning");
+	hal_lcd_print_state("Thinking");
 	hal_led_on(LED_REASONING);
 }
 
@@ -34,7 +36,7 @@ STATE_UPDATE(reasoning) {
   // }
   // Serial.println();
 
-	if (forward_collision >= COLLISION_BLOCKED) {
+	if (forward_collision == COLLISION_BLOCKED) {
 		random_number = random(3); // 0 - 2
 
 		if (random_number == 0) {
@@ -49,10 +51,14 @@ STATE_UPDATE(reasoning) {
 			if (backward_collision == COLLISION_CLOSE) {
 				fsm_movement.trigger(EVENT_REASONING_MOVE_SLOW_BACKWARD);
 			}
-			else if (backward_collision <= COLLISION_NEAR) {
+			else if (
+				backward_collision == COLLISION_NONE ||
+				backward_collision == COLLISION_FAR ||
+				backward_collision == COLLISION_NEAR
+			) {
 				fsm_movement.trigger(EVENT_REASONING_MOVE_BACKWARD);
 			}
-			else { // cannot go back, turn instead
+			else { // backward_collision == COLLISION_BLOCKED, cannot go back, turn instead
 				random_number = random(2); // 0 - 1
 
 				if (random_number == 0) {
@@ -64,10 +70,10 @@ STATE_UPDATE(reasoning) {
 			}
 		}
 	}
-	else if (forward_collision >= COLLISION_NEAR && forward_collision <= COLLISION_CLOSE) {
+	else if (forward_collision == COLLISION_CLOSE) {
 		fsm_movement.trigger(EVENT_REASONING_MOVE_SLOW_FORWARD);
 	}
-	else { // forward_collision <= COLLISION_NEAR
+	else { // COLLISION_NONE || COLLISION_FAR || COLLISION_NEAR
 		fsm_movement.trigger(EVENT_REASONING_MOVE_FORWARD);
 	}
 }
@@ -79,6 +85,7 @@ STATE_EXIT(reasoning) {
 // BRAKE ----------------------------------------------------------------------------
 STATE_ENTER(brake) {
 	TRACELN("State: Brake");
+	hal_lcd_print_state("Brake   ");
 	hal_motor_brake(MOTOR_BOTH);
 }
 
@@ -93,6 +100,7 @@ STATE_EXIT(brake) {
 // STOP ----------------------------------------------------------------------------
 STATE_ENTER(stop) {
 	TRACELN("State: Stop");
+	hal_lcd_print_state("Stop    ");
 	hal_motor_stop(MOTOR_BOTH);
 }
 
@@ -107,6 +115,7 @@ STATE_EXIT(stop) {
 // FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(forward) {
 	TRACELN("State: Forward");
+	hal_lcd_print_state("<<      ");
 	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_HALF);
 }
 
@@ -121,6 +130,7 @@ STATE_EXIT(forward) {
 // SLOW FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(slow_forward) {
 	TRACELN("State: Slow Forward");
+	hal_lcd_print_state("<       ");
 	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_QUATER);
 }
 
@@ -135,6 +145,7 @@ STATE_EXIT(slow_forward) {
 // FAST FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(fast_forward) {
 	TRACELN("State: Fast Forward");
+	hal_lcd_print_state("<<<     ");
 	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_FULL);
 }
 
@@ -149,6 +160,7 @@ STATE_EXIT(fast_forward) {
 // BACKWARD ----------------------------------------------------------------------------
 STATE_ENTER(backward) {
 	TRACELN("State: Backward");
+	hal_lcd_print_state(">>      ");
 	hal_motor_drive(MOTOR_BOTH, -MOTOR_SPEED_HALF);
 }
 
@@ -163,6 +175,7 @@ STATE_EXIT(backward) {
 // SLOW BACKWARD ----------------------------------------------------------------------------
 STATE_ENTER(slow_backward) {
 	TRACELN("State: Slow Backward");
+	hal_lcd_print_state(">       ");
 	hal_motor_drive(MOTOR_BOTH, -MOTOR_SPEED_QUATER);
 }
 
@@ -177,6 +190,7 @@ STATE_EXIT(slow_backward) {
 // TURN LEFT ----------------------------------------------------------------------------
 STATE_ENTER(turn_left) {
 	TRACELN("State: Turn Left");
+	hal_lcd_print_state("Left    ");
 	hal_servo_stop_scanning(SCANNING_ALL);
 	hal_servo_rotate_left();
 	hal_motor_turn_left(MOTOR_SPEED_HALF);
@@ -193,6 +207,7 @@ STATE_EXIT(turn_left) {
 // TURN RIGHT ----------------------------------------------------------------------------
 STATE_ENTER(turn_right) {
 	TRACELN("State: Turn Right");
+	hal_lcd_print_state("Right   ");
 	hal_servo_stop_scanning(SCANNING_ALL);
 	hal_servo_rotate_right();
 	hal_motor_turn_right(MOTOR_SPEED_HALF);
@@ -211,16 +226,19 @@ void setup_fsm_movement() {
 	// Move forward faster when no obstacles while moving
 	TRANSITION(movement, forward, fast_forward, EVENT_FORWARD_OBSTACLE_NONE);
 
+	TRANSITION(movement, slow_forward, forward, EVENT_FORWARD_OBSTACLE_NONE);
 	TRANSITION(movement, slow_forward, forward, EVENT_FORWARD_OBSTACLE_FAR);
+	TRANSITION(movement, slow_forward, forward, EVENT_FORWARD_OBSTACLE_NEAR);
 
 	// Slow down when forward obstacle is near
   TRANSITION(movement, fast_forward, forward, EVENT_FORWARD_OBSTACLE_FAR);
-
+	TRANSITION(movement, fast_forward, forward, EVENT_FORWARD_OBSTACLE_NEAR);
 	TRANSITION(movement, fast_forward, slow_forward, EVENT_FORWARD_OBSTACLE_CLOSE);
-	TRANSITION(movement, forward, slow_forward, EVENT_FORWARD_OBSTACLE_CLOSE);
-
 	TRANSITION(movement, fast_forward, brake, EVENT_FORWARD_OBSTACLE_BLOCKED);
+
+	TRANSITION(movement, forward, slow_forward, EVENT_FORWARD_OBSTACLE_CLOSE);
 	TRANSITION(movement, forward, brake, EVENT_FORWARD_OBSTACLE_BLOCKED);
+
 	TRANSITION(movement, slow_forward, stop, EVENT_FORWARD_OBSTACLE_BLOCKED);
 
 	// Move backward faster when no obstacles while moving
@@ -230,8 +248,8 @@ void setup_fsm_movement() {
 
   // Slow down when backward obstacle is near
 	TRANSITION(movement, backward, slow_backward, EVENT_BACKWARD_OBSTACLE_CLOSE);
-
 	TRANSITION(movement, backward, brake, EVENT_BACKWARD_OBSTACLE_BLOCKED);
+
 	TRANSITION(movement, slow_backward, stop, EVENT_BACKWARD_OBSTACLE_BLOCKED);
 
 	// Idle after stop
