@@ -25,7 +25,7 @@ void hal_lcd_print_distances(unsigned int front, unsigned int turret, unsigned i
   lcd.print(front);
   lcd.print("cm ");
 
-  lcd.setCursor(0, 8);
+  lcd.setCursor(8, 1);
   lcd.print(back);
   lcd.print("cm ");
 }
