@@ -94,9 +94,9 @@
 #define TICK_I2C 100
 
 // Movement
-#define MOTOR_SPEED_FULL 1.0
-#define MOTOR_SPEED_HALF 0.8
-#define MOTOR_SPEED_QUATER 0.6
+#define MOTOR_SPEED_FULL    0.6 //1.0
+#define MOTOR_SPEED_HALF    0.5 //0.8
+#define MOTOR_SPEED_QUATER  0.4 //0.6
 
 #define MOTOR_DIRECTION_FORWARD true
 #define MOTOR_DIRECTION_BACKWARD false
