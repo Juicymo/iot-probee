@@ -5,13 +5,13 @@ boolean _motor_right_direction 	= MOTOR_DIRECTION_FORWARD; // true = forward, fa
 void _hal_motor_off(byte motor) {
 	if (motor == MOTOR_LEFT || motor == MOTOR_BOTH) {
 		analogWrite(MOTOR_LEFT_PWM_PIN, 0);
-		digitalWrite(MOTOR_LEFT_DIRECTION_PIN, LOW);
-		digitalWrite(MOTOR_LEFT_ENABLE_PIN, LOW);
+		digitalWrite(MOTOR_LEFT_DIRECTION_PIN_1, LOW);
+		digitalWrite(MOTOR_LEFT_DIRECTION_PIN_2, LOW);
 	}
 	if (motor == MOTOR_RIGHT || motor == MOTOR_BOTH) {
 		analogWrite(MOTOR_RIGHT_PWM_PIN, 0);
-		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN, LOW);
-		digitalWrite(MOTOR_RIGHT_ENABLE_PIN, LOW);
+		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_1, LOW);
+		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_2, LOW);
 	}
 }
 
@@ -19,14 +19,14 @@ void _hal_motor_drive_fwd(byte motor, byte pwm) {
 	if (motor == MOTOR_LEFT || motor == MOTOR_BOTH) {
 		_motor_left_direction = MOTOR_DIRECTION_FORWARD;
 		analogWrite(MOTOR_LEFT_PWM_PIN, pwm);
-		digitalWrite(MOTOR_LEFT_DIRECTION_PIN, HIGH);
-		digitalWrite(MOTOR_LEFT_ENABLE_PIN, HIGH);
+		digitalWrite(MOTOR_LEFT_DIRECTION_PIN_1, HIGH);
+		digitalWrite(MOTOR_LEFT_DIRECTION_PIN_2, LOW);
 	}
 	if (motor == MOTOR_RIGHT || motor == MOTOR_BOTH) {
 		_motor_right_direction = MOTOR_DIRECTION_FORWARD;
 		analogWrite(MOTOR_RIGHT_PWM_PIN, pwm);
-		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN, HIGH);
-		digitalWrite(MOTOR_RIGHT_ENABLE_PIN, HIGH);
+		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_1, HIGH);
+		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_2, LOW);
 	}
 }
 
@@ -34,14 +34,14 @@ void _hal_motor_drive_bwd(byte motor, byte pwm) {
 	if (motor == MOTOR_LEFT || motor == MOTOR_BOTH) {
 		_motor_left_direction = MOTOR_DIRECTION_BACKWARD;
 		analogWrite(MOTOR_LEFT_PWM_PIN, pwm);
-		digitalWrite(MOTOR_LEFT_DIRECTION_PIN, LOW);
-		digitalWrite(MOTOR_LEFT_ENABLE_PIN, HIGH);
+		digitalWrite(MOTOR_LEFT_DIRECTION_PIN_1, LOW);
+		digitalWrite(MOTOR_LEFT_DIRECTION_PIN_2, HIGH);
 	}
 	if (motor == MOTOR_RIGHT || motor == MOTOR_BOTH) {
 		_motor_right_direction = MOTOR_DIRECTION_BACKWARD;
 		analogWrite(MOTOR_RIGHT_PWM_PIN, pwm);
-		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN, LOW);
-		digitalWrite(MOTOR_RIGHT_ENABLE_PIN, HIGH);
+		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_1, LOW);
+		digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_2, HIGH);
 	}
 }
 
@@ -50,30 +50,30 @@ void _hal_motor_brake(byte motor, byte pwm) {
 		analogWrite(MOTOR_LEFT_PWM_PIN, pwm);
 
 		if (_motor_left_direction == MOTOR_DIRECTION_FORWARD) {
-			digitalWrite(MOTOR_LEFT_DIRECTION_PIN, LOW);
+			digitalWrite(MOTOR_LEFT_DIRECTION_PIN_1, LOW);
+			digitalWrite(MOTOR_LEFT_DIRECTION_PIN_2, HIGH);
 		}
 		else {
-			digitalWrite(MOTOR_LEFT_DIRECTION_PIN, HIGH);
+			digitalWrite(MOTOR_LEFT_DIRECTION_PIN_1, HIGH);
+			digitalWrite(MOTOR_LEFT_DIRECTION_PIN_2, LOW);
 		}
-
-		digitalWrite(MOTOR_LEFT_ENABLE_PIN, HIGH);
 	}
 	if (motor == MOTOR_RIGHT || motor == MOTOR_BOTH) {
 		analogWrite(MOTOR_RIGHT_PWM_PIN, pwm);
 
 		if (_motor_right_direction == MOTOR_DIRECTION_FORWARD) {
-			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN, LOW);
+			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_1, LOW);
+			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_2, HIGH);
 		}
 		else {
-			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN, HIGH);
+			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_1, HIGH);
+			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN_2, LOW);
 		}
-
-		digitalWrite(MOTOR_RIGHT_ENABLE_PIN, HIGH);
 	}
 }
 
 // Public
-void hal_motor_drive(byte motor, float speed) { // speed: fwd -> {0,5 - 1.0}, bwd -> {-0,5 - -1.0}
+void hal_motor_drive(byte motor, float speed) { // speed: fwd -> {0.5 - 1.0}, bwd -> {-0.5 - -1.0}
 	TRACE("MOTOR ");
 	TRACE(motor);
 	TRACE(": ");
@@ -118,12 +118,13 @@ void hal_motor_stop(byte motor) {
 }
 
 void setup_hal_motor() {
-	pinMode(MOTOR_LEFT_DIRECTION_PIN, OUTPUT);
-	pinMode(MOTOR_LEFT_ENABLE_PIN, OUTPUT);
-	pinMode(MOTOR_RIGHT_DIRECTION_PIN, OUTPUT);
-	pinMode(MOTOR_RIGHT_ENABLE_PIN, OUTPUT);
 	pinMode(MOTOR_LEFT_PWM_PIN, OUTPUT);
+	pinMode(MOTOR_LEFT_DIRECTION_PIN_1, OUTPUT);
+	pinMode(MOTOR_LEFT_DIRECTION_PIN_2, OUTPUT);
+
 	pinMode(MOTOR_RIGHT_PWM_PIN, OUTPUT);
+	pinMode(MOTOR_RIGHT_DIRECTION_PIN_1, OUTPUT);
+	pinMode(MOTOR_RIGHT_DIRECTION_PIN_2, OUTPUT);
 
 	hal_motor_stop(MOTOR_BOTH);
 }
