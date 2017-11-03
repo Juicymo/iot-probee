@@ -56,7 +56,7 @@ void _hal_motor_brake(byte motor, byte pwm) {
 			digitalWrite(MOTOR_LEFT_DIRECTION_PIN, HIGH);
 		}
 
-		digitalWrite(MOTOR_LEFT_ENABLE_PIN, LOW);
+		digitalWrite(MOTOR_LEFT_ENABLE_PIN, HIGH);
 	}
 	if (motor == MOTOR_RIGHT || motor == MOTOR_BOTH) {
 		analogWrite(MOTOR_RIGHT_PWM_PIN, pwm);
@@ -68,7 +68,7 @@ void _hal_motor_brake(byte motor, byte pwm) {
 			digitalWrite(MOTOR_RIGHT_DIRECTION_PIN, HIGH);
 		}
 
-		digitalWrite(MOTOR_RIGHT_ENABLE_PIN, LOW);
+		digitalWrite(MOTOR_RIGHT_ENABLE_PIN, HIGH);
 	}
 }
 
