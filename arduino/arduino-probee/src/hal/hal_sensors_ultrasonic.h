@@ -27,7 +27,12 @@ void _hal_sensors_ultrasonic_handle_laser(uint8_t i) {
         hal_servo_stop_scanning(SCANNING_FULL);
       } else {
         hal_laser_off(LASER_TURRET);
-        hal_servo_start_scanning(SCANNING_FULL);
+        if (fsm_is_idle) {
+          hal_servo_start_scanning(SCANNING_FULL);
+        }
+        else {
+          hal_servo_rotate_forward();
+        }
       }
     }
   }
@@ -86,7 +91,10 @@ void _hal_sensors_ultrasonic_handle_distances_update(uint8_t i) {
 void _hal_sensors_ultrasonic_update_fsm_events_for_sensor_turret(uint8_t i) {
   byte collision = hal_sensors_ultrasonic_collisions[i];
 
-  if (collision >= COLLISION_CLOSE) {
+  if (collision == COLLISION_BLOCKED) {
+    fsm_movement.trigger(EVENT_TURRET_OBSTACLE_BLOCKED);
+  }
+  else if (collision == COLLISION_CLOSE) {
     fsm_movement.trigger(EVENT_TURRET_OBSTACLE_PRESENT);
   }
   else {
