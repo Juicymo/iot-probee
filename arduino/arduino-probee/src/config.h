@@ -44,8 +44,8 @@
 
 // Servos
 #define ROTATION_FORWARD      64
-#define ROTATION_LEFT         20
-#define ROTATION_RIGHT        120
+#define ROTATION_LEFT         10
+#define ROTATION_RIGHT        130
 // true = left, false = right
 #define SCAN_FULL_STARTING_DIRECTION true
 #define SCAN_FORWARD_STARTING_DIRECTION true
