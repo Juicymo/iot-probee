@@ -89,6 +89,7 @@ boolean hal_servo_is_scanning(byte scanning) {
 	if (scanning == SCANNING_FULL) {
 		return _hal_servo_is_scanning_full;
 	}
+	return false;
 }
 
 // Public - Rotation
