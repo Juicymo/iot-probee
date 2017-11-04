@@ -2,13 +2,15 @@ require 'agens'
 
 require_relative 'communication/I2C.rb'
 
+require 'agens'
+
 # Definition
 class UltrasonicSensor < Sensor
-	include I2C
+
 end
 
 class Motor < Actuator
-	include I2C
+
 end
 
 class MovementAgent < Agent
@@ -16,7 +18,7 @@ class MovementAgent < Agent
 		sensor UltrasonicSensor
 		actuator Motor
 	end
-	
+
 	def perform_reasoning
 		forward
 	end
@@ -24,6 +26,16 @@ end
 
 class ProbeeMAS < MAS
 	agent MovementAgent
+end
+
+
+class Jessie < ExampleAgent
+
+end
+
+class ExampleMAS < MAS
+	agent Jessie
+	agent James
 end
 
 # Program
