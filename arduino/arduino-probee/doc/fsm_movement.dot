@@ -1,0 +1,54 @@
+# Run in zsh:
+# dot -Tpng fsm_reasoning.dot >! fsm_reasoning.png
+
+digraph finite_state_machine {
+	rankdir=LR;
+	size="8,5"
+	node [shape = doublecircle]; idle;
+	node [shape = circle];
+
+	forward -> fast_forward [ label = "" ];
+	slow_forward -> forward [ label = "" ];
+	slow_forward -> forward [ label = "" ];
+	slow_forward -> forward [ label = "" ];
+	fast_forward -> forward [ label = "" ];
+	fast_forward -> forward [ label = "" ];
+	fast_forward -> slow_forward [ label = "" ];
+	fast_forward -> brake [ label = "" ];
+	forward -> slow_forward [ label = "" ];
+	forward -> brake [ label = "" ];
+	slow_forward -> brake [ label = "" ];
+	fast_forward -> brake [ label = "" ];
+	forward -> brake [ label = "" ];
+	slow_forward -> brake [ label = "" ];
+	slow_backward -> backward [ label = "" ];
+	slow_backward -> backward [ label = "" ];
+	slow_backward -> backward [ label = "" ];
+  backward -> slow_backward [ label = "" ];
+	backward -> brake [ label = "" ];
+	slow_backward -> stop [ label = "" ];
+	stop -> idle [ label = "" ];
+	reasoning -> forward [ label = "" ];
+	reasoning -> slow_forward [ label = "" ];
+	reasoning -> backward [ label = "" ];
+	reasoning -> slow_backward [ label = "" ];
+	reasoning -> turn_left [ label = "" ];
+	reasoning -> turn_right [ label = "" ];
+	idle -> reasoning [ label = "" ];
+	idle -> reasoning [ label = "" ];
+	idle -> reasoning [ label = "" ];
+	idle -> reasoning [ label = "" ];
+	turn_right -> stop [ label = "" ];
+	turn_left -> stop [ label = "" ];
+	turn_right -> stop [ label = "" ];
+	turn_left -> stop [ label = "" ];
+
+	brake -> stop [ label = "100ms" ];
+	turn_right -> stop [ label = "2000ms" ];
+	turn_left -> stop [ label = "2000ms" ];
+	idle -> reasoning [ label = "5000ms" ];
+	slow_backward -> stop [ label = "1000ms" ];
+	backward -> stop [ label = "1000ms" ];
+	forward -> stop [ label = "10000ms" ];
+	fast_forward -> stop [ label = "10000ms" ];
+}
