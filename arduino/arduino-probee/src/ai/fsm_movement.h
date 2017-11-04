@@ -4,7 +4,7 @@
 
 // IDLE ----------------------------------------------------------------------------
 STATE_ENTER(idle) {
-	//TRACELN("State: Idle");
+	TRACELN("State: Idle");
 	hal_lcd_print_state("Idle    ");
 	fsm_is_idle = true;
 	hal_servo_start_scanning(SCANNING_FULL);
@@ -23,7 +23,7 @@ STATE_EXIT(idle) {
 // REASONING ----------------------------------------------------------------------------
 long random_number;
 STATE_ENTER(reasoning) {
-	//TRACELN("State: Reasoning");
+	TRACELN("State: Reasoning");
 	hal_lcd_print_state("Thinking");
 	hal_led_on(LED_REASONING);
 }
@@ -87,7 +87,7 @@ STATE_EXIT(reasoning) {
 
 // BRAKE ----------------------------------------------------------------------------
 STATE_ENTER(brake) {
-	//TRACELN("State: Brake");
+	TRACELN("State: Brake");
 	hal_lcd_print_state("Brake   ");
 	hal_motor_brake(MOTOR_BOTH);
 }
@@ -102,7 +102,7 @@ STATE_EXIT(brake) {
 
 // STOP ----------------------------------------------------------------------------
 STATE_ENTER(stop) {
-	//TRACELN("State: Stop");
+	TRACELN("State: Stop");
 	hal_lcd_print_state("Stop    ");
 	hal_motor_stop(MOTOR_BOTH);
 }
@@ -117,7 +117,7 @@ STATE_EXIT(stop) {
 
 // FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(forward) {
-	//TRACELN("State: Forward");
+	TRACELN("State: Forward");
 	hal_lcd_print_state("<<      ");
 	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_HALF);
 }
@@ -132,7 +132,7 @@ STATE_EXIT(forward) {
 
 // SLOW FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(slow_forward) {
-	//TRACELN("State: Slow Forward");
+	TRACELN("State: Slow Forward");
 	hal_lcd_print_state("<       ");
 	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_QUATER);
 }
@@ -147,7 +147,7 @@ STATE_EXIT(slow_forward) {
 
 // FAST FORWARD ----------------------------------------------------------------------------
 STATE_ENTER(fast_forward) {
-	//TRACELN("State: Fast Forward");
+	TRACELN("State: Fast Forward");
 	hal_lcd_print_state("<<<     ");
 	hal_motor_drive(MOTOR_BOTH, MOTOR_SPEED_FULL);
 }
@@ -162,7 +162,7 @@ STATE_EXIT(fast_forward) {
 
 // BACKWARD ----------------------------------------------------------------------------
 STATE_ENTER(backward) {
-	//TRACELN("State: Backward");
+	TRACELN("State: Backward");
 	hal_lcd_print_state(">>      ");
 	hal_motor_drive(MOTOR_BOTH, -MOTOR_SPEED_HALF);
 }
@@ -177,7 +177,7 @@ STATE_EXIT(backward) {
 
 // SLOW BACKWARD ----------------------------------------------------------------------------
 STATE_ENTER(slow_backward) {
-	//TRACELN("State: Slow Backward");
+	TRACELN("State: Slow Backward");
 	hal_lcd_print_state(">       ");
 	hal_motor_drive(MOTOR_BOTH, -MOTOR_SPEED_QUATER);
 }
@@ -192,11 +192,11 @@ STATE_EXIT(slow_backward) {
 
 // TURN LEFT ----------------------------------------------------------------------------
 STATE_ENTER(turn_left) {
-	//TRACELN("State: Turn Right");
+	TRACELN("State: Turn Right");
 	hal_lcd_print_state("Right   ");
 	hal_servo_stop_scanning(SCANNING_ALL);
 	hal_servo_rotate_left();
-	hal_motor_turn_left(MOTOR_SPEED_HALF);
+	hal_motor_turn_left(MOTOR_SPEED_FULL);
 }
 
 STATE_UPDATE(turn_left) {
@@ -210,11 +210,11 @@ STATE_EXIT(turn_left) {
 
 // TURN RIGHT ----------------------------------------------------------------------------
 STATE_ENTER(turn_right) {
-	//TRACELN("State: Turn Left");
+	TRACELN("State: Turn Left");
 	hal_lcd_print_state("Left    ");
 	hal_servo_stop_scanning(SCANNING_ALL);
 	hal_servo_rotate_right();
-	hal_motor_turn_right(MOTOR_SPEED_HALF);
+	hal_motor_turn_right(MOTOR_SPEED_FULL);
 }
 
 STATE_UPDATE(turn_right) {
@@ -249,7 +249,7 @@ void setup_fsm_movement() {
 	TRANSITION(movement, fast_forward, brake, EVENT_TURRET_OBSTACLE_BLOCKED);
 	TRANSITION(movement, forward, brake, EVENT_TURRET_OBSTACLE_BLOCKED);
 	TRANSITION(movement, slow_forward, brake, EVENT_TURRET_OBSTACLE_BLOCKED);
-	
+
 	// Move backward faster when no obstacles while moving
 	TRANSITION(movement, slow_backward, backward, EVENT_FORWARD_OBSTACLE_NONE);
 	TRANSITION(movement, slow_backward, backward, EVENT_BACKWARD_OBSTACLE_FAR);
@@ -273,26 +273,26 @@ void setup_fsm_movement() {
 	TRANSITION(movement, reasoning, turn_right, EVENT_REASONING_TURN_RIGHT);
 
 	// React to obstacles while idle
-	TRANSITION(movement, idle, reasoning, EVENT_FORWARD_OBSTACLE_CLOSE);
+	//TRANSITION(movement, idle, reasoning, EVENT_FORWARD_OBSTACLE_CLOSE);
 	TRANSITION(movement, idle, reasoning, EVENT_FORWARD_OBSTACLE_BLOCKED);
-	TRANSITION(movement, idle, reasoning, EVENT_BACKWARD_OBSTACLE_CLOSE);
+	//TRANSITION(movement, idle, reasoning, EVENT_BACKWARD_OBSTACLE_CLOSE);
 	TRANSITION(movement, idle, reasoning, EVENT_BACKWARD_OBSTACLE_BLOCKED);
 
 	// Stop turning on collision
-	TRANSITION(movement, turn_right, stop, EVENT_TURRET_OBSTACLE_PRESENT);
-	TRANSITION(movement, turn_left, stop, EVENT_TURRET_OBSTACLE_PRESENT);
-	TRANSITION(movement, turn_right, stop, EVENT_TURRET_OBSTACLE_BLOCKED);
-	TRANSITION(movement, turn_left, stop, EVENT_TURRET_OBSTACLE_BLOCKED);
+	//TRANSITION(movement, turn_right, stop, EVENT_TURRET_OBSTACLE_PRESENT);
+	//TRANSITION(movement, turn_left, stop, EVENT_TURRET_OBSTACLE_PRESENT);
+	//TRANSITION(movement, turn_right, stop, EVENT_TURRET_OBSTACLE_BLOCKED);
+	//TRANSITION(movement, turn_left, stop, EVENT_TURRET_OBSTACLE_BLOCKED);
 
 	// Stop after braking
 	TIMED_TRANSITION(movement, brake, stop, 100);
 
 	// Stop turning after given interval
-	TIMED_TRANSITION(movement, turn_right, stop, 2000);
-	TIMED_TRANSITION(movement, turn_left, stop, 2000);
+	TIMED_TRANSITION(movement, turn_right, stop, 1000);
+	TIMED_TRANSITION(movement, turn_left, stop, 1000);
 
 	// Start reasoning when idle for too long
-	TIMED_TRANSITION(movement, idle, reasoning, 5000);
+	TIMED_TRANSITION(movement, idle, reasoning, 10000);
 
 	// Start idle when moving forward for too long
 	TIMED_TRANSITION(movement, slow_backward, stop, 1000);
