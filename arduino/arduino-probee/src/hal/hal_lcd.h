@@ -15,11 +15,11 @@ void hal_lcd_clear_line_2() {
   lcd.print("                ");
 }
 
-void hal_lcd_print_distances(unsigned int front, unsigned int turret, unsigned int back) {
+void hal_lcd_print_distances(unsigned int front, unsigned int back) {
   lcd.setCursor(0, 0);
   //         1234567812345678
-  lcd.print(turret);
-  lcd.print("cm ");
+  //lcd.print(turret);
+  //lcd.print("cm ");
 
   lcd.setCursor(0, 1);
   lcd.print(front);
@@ -71,7 +71,6 @@ void setup_hal_lcd() {
 void hal_lcd_loop() {
   hal_lcd_print_distances(
 		hal_sensors_ultrasonic_distances_cm[SONAR_SENSOR_FORWARD],
-		hal_sensors_ultrasonic_distances_cm[SONAR_SENSOR_TURRET],
 		hal_sensors_ultrasonic_distances_cm[SONAR_SENSOR_BACKWARD]
 	);
 }

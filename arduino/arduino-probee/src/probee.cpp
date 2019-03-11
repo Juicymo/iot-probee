@@ -4,14 +4,16 @@
 //#include <Bounce.h>
 #include <Servo.h>
 #include <Wire.h>
+#include <SPI.h>
 
 // External Libraries
 #include <Fsm.h>
-
-// Custom Libraries
 #include <LiquidCrystal_PCF8574.h>
 //#include <LiquidMenu.h>
 #include <NewPing.h>
+
+// Local Libraries
+#include <Pixy.h>
 
 #define PROBEE_DEBUG
 #include "serial.h"
@@ -36,7 +38,7 @@ void setup() {
 	//setup_mas();
 	setup_multitasking();
 
-	hal_lcd_welcome();
+	//hal_lcd_welcome();
 }
 
 void loop() {

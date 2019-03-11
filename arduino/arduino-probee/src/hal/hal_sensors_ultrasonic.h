@@ -3,8 +3,7 @@
 unsigned long _pingTimers[SONAR_NUM]; // Holds the times when the next ping should happen for each sensor.
 uint8_t _currentSensor = 0;           // Keeps track of which sensor is active.
 NewPing _sonars[SONAR_NUM] = {        // Sensor object array.
-  NewPing(SONAR_TURRET_TRIGGER_PIN, SONAR_TURRET_ECHO_PIN, SONAR_MAX_DISTANCE),    // Each sensor's trigger pin, echo pin, and max distance to ping.
-  NewPing(SONAR_FORWARD_TRIGGER_PIN, SONAR_FORWARD_ECHO_PIN, SONAR_MAX_DISTANCE),
+  NewPing(SONAR_FORWARD_TRIGGER_PIN, SONAR_FORWARD_ECHO_PIN, SONAR_MAX_DISTANCE),   // Each sensor's trigger pin, echo pin, and max distance to ping.
   NewPing(SONAR_BACKWARD_TRIGGER_PIN, SONAR_BACKWARD_ECHO_PIN, SONAR_MAX_DISTANCE)
 };
 
@@ -20,7 +19,7 @@ void _sensors_ultrasonic_echo_check() { // If ping received, set the sensor dist
 }
 
 void _hal_sensors_ultrasonic_handle_laser(uint8_t i) {
-  if (i == SONAR_SENSOR_TURRET) {
+  if (i == SONAR_SENSOR_FORWARD) {
     if (hal_servo_is_scanning(SCANNING_FULL) || hal_laser_is_on(LASER_TURRET)) {
       if (hal_sensors_ultrasonic_distances_cm[i] <= LASER_DISTANCE_ON) {
         hal_laser_on(LASER_TURRET);
@@ -59,15 +58,7 @@ void _hal_sensors_ultrasonic_update_distance_for_sensor(uint8_t i, byte far, byt
 }
 
 void _hal_sensors_ultrasonic_handle_distances_update(uint8_t i) {
-  if (i == SONAR_SENSOR_TURRET) {
-    _hal_sensors_ultrasonic_update_distance_for_sensor(i,
-       DETECTION_DISTANCE_TURRET_FAR,
-       DETECTION_DISTANCE_TURRET_NEAR,
-       DETECTION_DISTANCE_TURRET_CLOSE,
-       DETECTION_DISTANCE_TURRET_BLOCKED
-    );
-  }
-  else if (i == SONAR_SENSOR_FORWARD) {
+  if (i == SONAR_SENSOR_FORWARD) {
     _hal_sensors_ultrasonic_update_distance_for_sensor(i,
        DETECTION_DISTANCE_FORWARD_FAR,
        DETECTION_DISTANCE_FORWARD_NEAR,
@@ -85,20 +76,6 @@ void _hal_sensors_ultrasonic_handle_distances_update(uint8_t i) {
   }
   else {
     WARNING("Cannot update distance for unknown ultrasonic sensor!")
-  }
-}
-
-void _hal_sensors_ultrasonic_update_fsm_events_for_sensor_turret(uint8_t i) {
-  byte collision = hal_sensors_ultrasonic_collisions[i];
-
-  if (collision == COLLISION_BLOCKED) {
-    fsm_movement.trigger(EVENT_TURRET_OBSTACLE_BLOCKED);
-  }
-  else if (collision == COLLISION_CLOSE) {
-    fsm_movement.trigger(EVENT_TURRET_OBSTACLE_PRESENT);
-  }
-  else {
-    fsm_movement.trigger(EVENT_TURRET_OBSTACLE_NONE);
   }
 }
 
@@ -143,10 +120,7 @@ void _hal_sensors_ultrasonic_update_fsm_events_for_sensor_backward(uint8_t i) {
 }
 
 void _hal_sensors_ultrasonic_handle_fsm_events_update(uint8_t i) {
-  if (i == SONAR_SENSOR_TURRET) {
-    _hal_sensors_ultrasonic_update_fsm_events_for_sensor_turret(i);
-  }
-  else if (i == SONAR_SENSOR_FORWARD) {
+  if (i == SONAR_SENSOR_FORWARD) {
     _hal_sensors_ultrasonic_update_fsm_events_for_sensor_forward(i);
   }
   else if (i == SONAR_SENSOR_BACKWARD) {
@@ -167,7 +141,7 @@ void _sensors_ultrasonic_one_sensor_cycle() { // Sensor ping cycle complete, do 
 
     _hal_sensors_ultrasonic_handle_distances_update(i);
     _hal_sensors_ultrasonic_handle_fsm_events_update(i);
-    _hal_sensors_ultrasonic_handle_laser(i);
+    //_hal_sensors_ultrasonic_handle_laser(i);
   }
   //Serial.println();
 }

@@ -74,15 +74,15 @@ void _hal_motor_brake(byte motor, byte pwm) {
 
 // Public
 void hal_motor_drive(byte motor, float speed) { // speed: fwd -> {0.5 - 1.0}, bwd -> {-0.5 - -1.0}
-	TRACE("MOTOR ");
-	TRACE(motor);
-	TRACE(": ");
-	TRACE(speed);
+	// TRACE("MOTOR ");
+	// TRACE(motor);
+	// TRACE(": ");
+	// TRACE(speed);
 
 	byte pwm = abs(speed) * 255;
 
-	TRACE(" -> ");
-	TRACELN(pwm);
+	// TRACE(" -> ");
+	// TRACELN(pwm);
 
 	if (pwm > 1) {
 		if (speed > 0) {

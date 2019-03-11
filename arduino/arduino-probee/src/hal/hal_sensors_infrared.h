@@ -1,5 +1,5 @@
 // Private
-bool hal_sensors_infrared_scan(pin) {
+bool _hal_sensors_infrared_scan(pin) {
 	return digitalRead(pin);
 }
 
@@ -10,9 +10,9 @@ void setup_hal_sensors_infrared() {
 }
 
 bool hal_sensors_infrared_forward_left_scan() {
-	return hal_sensors_infrared_scan(INFRARED_FORWARD_LEFT);
+	return _hal_sensors_infrared_scan(INFRARED_FORWARD_LEFT);
 }
 
 bool hal_sensors_infrared_forward_left_scan() {
-	return hal_sensors_infrared_scan(INFRARED_FORWARD_RIGHT);
+	return _hal_sensors_infrared_scan(INFRARED_FORWARD_RIGHT);
 }
